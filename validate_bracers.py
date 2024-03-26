@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 
-# Write a script to validate matching closing paran; square, curly, braces
-# test_str = "{}]" --> INVALID, ] was never opened
-# test_str = "[{}]" --> VALID
-# test_str = "[]" --> VALID
-# test_str = "[]{}" --> VALID
-# test_str = "[{]}" --> INVALID, brackets closed incorrectly!
-# test_str = "{{]}" --> INVALID, brackets opened incorrectly!
+# Write a script to validate matching closing bracers; square, curly, round
 
 def validate_bracers(test_str):
     if len(test_str) % 2 != 0:

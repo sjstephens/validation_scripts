@@ -3,32 +3,37 @@
 # Write a script to validate matching closing bracers; square, curly, round
 
 def validate_bracers(test_str):
-    if len(test_str) % 2 != 0:
-        # Length is not veen so something is missing
-        return "band input length", len(test_str)
-    # initialize parentheses dict
+    if (len(test_str) % 2 != 0) or (len(test_str) == 0):
+        # Length is not even, bad input string
+        return "bad input length", len(test_str)
+    # initialize braces  dict
     par_dict = {'(':')','{':'}','[':']'}
     stack = []
     for char in test_str:
-        # push opening bracket to stack
+        # push opening braces on to stack
         if char in par_dict.keys():
             stack.append(char)
-        else:
+            continue
+        # check for closing braces
+        if char in par_dict.values():
             # closing bracket without matching opening bracket
             if stack == []:
                 return "missing open bracer", char
-            # if closing bracket -> pop stack top
+            # if closing bracket -> pop last open brace
             open_brac = stack.pop()
-            # not matching bracket -> invalid!
+            # check if close matches the value of the opened key
             if char != par_dict[open_brac]:
                 return "mismatch bracer", char
+        else:
+            # Not a bracer
+            continue
     return "matching", ""
 
 if __name__ == "__main__":
-    samples = ["{}]","[{}]","[]","[]{}","[{]}","{{]}"]
+    samples = ["{}]","[{}]","[]","[]{}","[{]}","{{]}","{ab}",""]
     for test_str in samples:
         x, y = validate_bracers(test_str)
         if x == "matching":
             print(("{} has matching braces".format(test_str)))
         else:
-            print(("{} has {}, at {}".format(test_str,x,y)))
+            print(("{} has {}, for {}".format(test_str,x,y)))

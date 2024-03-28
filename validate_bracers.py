@@ -7,6 +7,8 @@ def validate_bracers(test_str):
         # Length is not even, bad input string
         return "bad input length", len(test_str)
     # initialize braces  dict
+    # could also build dict with all braces (closes set to blah)
+    # then do a dict.get on closes. code below will be infficient for large dicts.
     par_dict = {'(':')','{':'}','[':']'}
     stack = []
     for char in test_str:
